@@ -25,6 +25,8 @@ This project demonstrates the creation of a CI/CD pipeline using GitHub Actions 
 
 ### Project Structure
 
+![Project Structure](docs/final-arc.png)
+
 ### Technologies Used
 
 - **Docker**: Containerization of applications.
