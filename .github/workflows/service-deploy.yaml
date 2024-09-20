@@ -24,10 +24,14 @@ jobs:
           printf "%s" "$SSH_PRIVATE_KEY" > mykey.pem
           chmod 600 mykey.pem
 
+      - name: Create directory on EC2 if it does not exist
+        run: |
+          ssh -o StrictHostKeyChecking=no -i mykey.pem ubuntu@$EC2_PUBLIC_IP "if [ ! -d ~/NetflixMovieCatalog ]; then mkdir ~/NetflixMovieCatalog; fi"
+
       - name: Copy deploy.sh to EC2
         run: |
           # Copy the deploy.sh script to the EC2 instance
-          scp -o StrictHostKeyChecking=no -i mykey.pem src/NetflixMovieCatalog/deploy.sh ubuntu@$EC2_PUBLIC_IP:~/NetflixMovieCatalog/
+          scp -o StrictHostKeyChecking=no -i mykey.pem src/NetflixMovieCatalog/deploy.sh ubuntu@$EC2_PUBLIC_IP:~/NetflixMovieCatalog/deploy.sh
 
       - name: SSH to EC2 and run deploy.sh
         run: |
