@@ -12,9 +12,6 @@ This project demonstrates the creation of a CI/CD pipeline using GitHub Actions 
 - [Project Structure](#project-structure)
 - [Technologies Used](#technologies-used)
 - [Setup Instructions](#setup-instructions)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Deployment](#deployment)
-- [License](#license)
 
 ### Team Members
 
