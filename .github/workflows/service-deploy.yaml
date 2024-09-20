@@ -1,0 +1,31 @@
+name: Netflix Movie Catalog Service Deployment
+
+on:
+  push:
+    paths:
+      - "src/NetflixMovieCatalog/**"
+    branches:
+      - main
+
+env:
+  EC2_PUBLIC_IP: 34.204.44.168 # TODO replace with your EC2 instance public IP
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # Define this secret in your GitHub repo settings
+
+jobs:
+  Deploy:
+    name: Deploy Netflix Movie Catalog in EC2
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the app code
+        uses: actions/checkout@v2
+
+      - name: SSH to EC2 instance
+        run: |
+          echo "$SSH_PRIVATE_KEY" > mykey.pem
+          chmod 600 mykey.pem
+
+          # Copy the files from the NetflixMovieCatalog directory to the EC2 instance.
+          scp -o StrictHostKeyChecking=no -i mykey.pem -r src/NetflixMovieCatalog/* ubuntu@$EC2_PUBLIC_IP:~/NetflixMovieCatalog/
+
+          # Connect to your EC2 instance and execute the deploy.sh script located in src/NetflixMovieCatalog.
+          ssh -i mykey.pem ubuntu@$EC2_PUBLIC_IP "bash ~/NetflixMovieCatalog/deploy.sh"
