@@ -19,17 +19,13 @@ jobs:
       - name: Checkout the app code
         uses: actions/checkout@v2
 
-      - name: Write SSH private key to file
+      - name: SSH to EC2 instance
         run: |
-          printf "%s" "$SSH_PRIVATE_KEY" > mykey.pem
+          echo "$SSH_PRIVATE_KEY" > mykey.pem
           chmod 600 mykey.pem
 
-      - name: SSH to EC2 instance and copy files
-        run: |
-          # Copy the NetflixMovieCatalog files to the EC2 instance
+          # Copy the files from the NetflixMovieCatalog directory to the EC2 instance.
           scp -o StrictHostKeyChecking=no -i mykey.pem -r src/NetflixMovieCatalog/* ubuntu@$EC2_PUBLIC_IP:~/NetflixMovieCatalog/
 
-      - name: Execute deploy script on EC2
-        run: |
-          # SSH into the EC2 instance and execute the deploy.sh script
-          ssh -o StrictHostKeyChecking=no -i mykey.pem ubuntu@$EC2_PUBLIC_IP "bash ~/NetflixMovieCatalog/deploy.sh"
+          # Connect to your EC2 instance and execute the deploy.sh script located in src/NetflixMovieCatalog.
+          ssh -i mykey.pem ubuntu@$EC2_PUBLIC_IP "bash ~/NetflixMovieCatalog/deploy.sh"

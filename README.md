@@ -35,26 +35,26 @@ This project demonstrates the creation of a CI/CD pipeline using GitHub Actions 
 
 - Clone the Repository:
 
-   ```sh
-   git clone https://github.com/your-repo/Nginx_And_Chill.git
-   cd Nginx_And_Chill
+  ```sh
+  git clone https://github.com/your-repo/Nginx_And_Chill.git
+  cd Nginx_And_Chill
 
-   ```
+  ```
 
 - For Nginx
 
-   ```
-   sudo docker pull nginx
-   ```
+  ```
+  sudo docker pull nginx
+  ```
 
 - For Netflix Frontend
 
-   ```
-   sudo docker pull anshikasrivastava1718/netflix-frontend:v0.0.1
-   ```
+  ```
+  sudo docker pull anshikasrivastava1718/netflix-frontend:v0.0.1
+  ```
 
 - For Netflix Movie Catalog
 
-   ```
-    sudo docker pull anshikasrivastava1718/netflix-movie-catalog:v0.0.1
-   ```
+  ```
+   sudo docker pull anshikasrivastava1718/netflix-movie-catalog:v0.0.1
+  ```
